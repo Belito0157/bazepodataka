@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <h1 class="display-1">Stavka Otpremnice</h1>
+  </div>
+  <div class="container">
+    <table class="table table-striped table-dark">
+        <div>
+            <form action="" method="POST">
+              {% csrf_token%}
+              <div class="form-group row">
+                <label for="brojotpremnice" class="col-sm-2 col-form-label">Broj Otpremnice</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" id="brojotpremnice"  name="brojotpremnice" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cena" class="col-sm-2 col-form-label">Cena</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" id="cena" name="cena" >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cena1" class="col-sm-2 col-form-label">Cena 1</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" id="cena1" name="cena1" >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cena2" class="col-sm-2 col-form-label">Cena 2</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" id="cena2" name="cena2">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary" data-toggle="alert">Search</button>
+                            {% if messages %}
+                              {% for message in messages %}
+                              {%if "insert" in message.tags %}
+                              <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                              {%endif%}
+                              </div>
+                              {% endfor %}                    
+                          {% endif %}
+                </div>
+              </div>
+            </form>
+          </div>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Broj Otpremnice</th>
+          <th scope="col">Sifra Artikla</th>
+          <th scope="col">Kolicina</th>
+          <th scope="col">PDV</th>
+          <th scope="col">Cena</th>
+          <th scope="col">Napomena</th>
+          <th scope="col">Naziv Artikla</th>
+          <th scope="col">Ukupna Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for na in data %}   
+        <tr>
+          <th scope="row">{{na.REDNIBROJ}}</th>
+          <td>{{na.BROJOTPREMNICE}}</td>
+          <td>{{na.SIFRAARTIKLA}}</td>
+          <td>{{na.KOLICINA}}</td>
+          <td>{{na.PDV}}</td>
+          <td>{{na.CENA}}</td>
+          <td>{{na.NAPOMENA}}</td>
+          <td>{{na.NAZIVARTIKLA}}</td>
+          <td>{{na.UKUPNACENA}}</td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
+    </div>
+
+    
+{% endblock %}

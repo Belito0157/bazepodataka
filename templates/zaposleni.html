@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <h1 class="display-1">Zaposlenii</h1>
+</div>
+<div class="container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">IME</th>
+          <th scope="col">PREZIME</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for za in data %}   
+        <tr>
+          <th scope="row">{{za.SIFRAZAPOSLENOG}}</th>
+          <td>{{za.IME}}</td>
+          <td>{{za.PREZIME}}</td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
+    </div> 
+
+    <div class="p-3 mb-2 bg-dark text-white" >
+      <h2 class="text-center">Insert Zasposleni</h2>
+    </div>
+    
+    <div>
+      <form action="/insertZ/" method="POST">
+        {% csrf_token%}
+        <div class="form-group row">
+          <label for="sifrazaposlenog" class="col-sm-2 col-form-label">Sifra Zaposlenog</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="sifrazaposlenog" name="sifrazaposlenog" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="ime" class="col-sm-2 col-form-label">Ime</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="ime" name="ime" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="prezime" class="col-sm-2 col-form-label">Prezime</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="prezime" name="prezime" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" data-toggle="alert">Insert</button>
+            {% if messages %}
+                {% for message in messages %}
+                {%if "insert" in message.tags %}
+                <div class="alert alert-danger" role="alert">
+                  {{ message }}
+                </div>
+                {%endif%}
+                {% endfor %}                    
+            {% endif %}
+          </div>
+        </div>
+      </form>
+
+      <div class="p-3 mb-2 bg-dark text-white" >
+        <h2 class="text-center">Update Zasposleni</h2>
+      </div>
+        
+        <div>
+          <form action="/updateZ/" method="POST">
+            {% csrf_token%}
+            <div class="form-group row">
+              <label for="sifrazaposlenog" class="col-sm-2 col-form-label">Sifra Zaposlenog</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" id="sifrazaposlenog" name="sifrazaposlenog" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="ime" class="col-sm-2 col-form-label">Ime</label>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" id="ime" name="ime" >
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="prezime" class="col-sm-2 col-form-label">Prezime</label>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" id="prezime" name="prezime" >
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" data-toggle="alert">Update</button>
+                {% if messages %}
+                    {% for message in messages %}
+                    {%if "update" in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                      {{ message }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}                    
+                {% endif %}
+              </div>
+            </div>
+          </form>
+
+          <div class="p-3 mb-2 bg-dark text-white" >
+            <h2 class="text-center">Delete Zasposleni</h2>
+          </div>
+            
+            <div>
+              <form action="/deleteZ/" method="POST">
+                {% csrf_token%}
+                <div class="form-group row">
+                  <label for="sifrazaposlenog" class="col-sm-2 col-form-label">Sifra Zaposlenog</label>
+                  <div class="col-sm-1">
+                    <input type="text" class="form-control" id="sifrazaposlenog" name="sifrazaposlenog" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ime" class="col-sm-2 col-form-label">Ime</label>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" id="ime" name="ime" >
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="prezime" class="col-sm-2 col-form-label">Prezime</label>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" id="prezime" name="prezime" >
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary" data-toggle="alert">Delete</button>
+                    {% if messages %}
+                        {% for message in messages %}
+                        {%if "delete" in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                          {{ message }}
+                        </div>
+                        {% endif %}
+                        {% endfor %}                    
+                    {% endif %}
+                  </div>
+                </div>
+              </form>
+{% endblock %}

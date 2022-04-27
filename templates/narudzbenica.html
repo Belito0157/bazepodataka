@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+      <div class="row justify-content-center">
+        <h1 class="display-1">Narudzbenica</h1>
+    </div>
+    <div class="container">
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Broj Kataloga</th>
+              <th scope="col">Sifra Zaposlenog</th>
+              <th scope="col">PIB</th>
+              <th scope="col">Broj Racuna</th>
+              <th scope="col">Datum</th>
+              <th scope="col">Napomena</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for na in data %}   
+            <tr>
+              <th scope="row">{{na.BROJNARUDZBENICE}}</th>
+              <td>{{na.BROJKATALOGA}}</td>
+              <td>{{na.SIFRAZAPOSLENOG}}</td>
+              <td>{{na.PIB}}</td>
+              <td>{{na.BROJRACUNA}}</td>
+              <td>{{na.DATUM}}</td>
+              <td>{{na.NAPOMENA}}</td>
+            </tr>
+            {% endfor %} 
+          </tbody>
+        </table>
+      </div> 
+
+         
+
+
+
+      <div class="p-3 mb-2 bg-dark text-white" >
+        <h2 class="text-center">Insert Narudzbenica</h2>
+      </div>
+
+        <div>
+          <form action="/insertN/" method="POST">
+            {% csrf_token%}
+            <div class="form-group row">
+              <label for="brojnarudzbenice" class="col-sm-2 col-form-label">Broj Narudzbenice</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" name="brojnarudzbenice" id="brojnarudzbenice" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="brojkataloga" class="col-sm-2 col-form-label">Broj Kataloga</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" name="brojkataloga" id="brojkataloga" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="sifrazaposlenog" class="col-sm-2 col-form-label">Sifra Zaposnlenog</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" name="sifrazaposlenog" id="sifrazaposlenog" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="pib" class="col-sm-2 col-form-label">PIB</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" id="pib" name="pib" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="brojracuna" class="col-sm-2 col-form-label">Broj Racuna</label>
+              <div class="col-sm-1">
+                <input type="text" class="form-control" id="brojracuna" name="brojracuna" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="date" class="col-2 col-form-label">Datum</label>
+              <div class="col-4">
+                <input class="form-control" name="date" type="date" value="2021-01-23" id="date">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="napomena" class="col-sm-2 col-form-label">Napomena</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="napomena" id="napomena" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" data-toggle="alert">Insert</button>
+                    {% if messages %}
+                      {% for message in messages %}
+                      {%if "insert" in message.tags %}
+                      <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                      {%endif%}
+                      </div>
+                      {% endfor %}                    
+                  {% endif %}
+              </div>
+            </div>
+          </form>
+        </div>
+
+        
+        <div class="p-3 mb-2 bg-dark text-white" >
+          <h2 class="text-center">Update Narudzbenica</h2>
+        </div>
+  
+        <div>
+            <form action="/updateN/" method="POST">
+              {% csrf_token%}
+              <div class="form-group row">
+                <label for="brojnarudzbenice" class="col-sm-2 col-form-label">Broj Narudzbenice</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" name="brojnarudzbenice" id="brojnarudzbenice" placeholder="condition" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="brojkataloga" class="col-sm-2 col-form-label">Broj Kataloga</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" name="brojkataloga" id="brojkataloga" placeholder="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="sifrazaposlenog" class="col-sm-2 col-form-label">Sifra Zaposnlenog</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" name="sifrazaposlenog" id="sifrazaposlenog" placeholder="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="pib" class="col-sm-2 col-form-label">PIB</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" id="pib" name="pib" placeholder="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="brojracuna" class="col-sm-2 col-form-label">Broj Racuna</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" id="brojracuna" name="brojracuna" placeholder="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="date" class="col-2 col-form-label">Datum</label>
+                <div class="col-4">
+                  <input class="form-control" name="date" type="date" id="date">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="napomena" class="col-sm-2 col-form-label">Napomena</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="napomena" id="napomena" placeholder="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary" data-toggle="alert">Update</button>
+                    {% if messages %}
+                      {% for message in messages %}
+                      {%if "update" in message.tags %}
+                      <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                      {%endif%}
+                      </div>
+                      {% endfor %}                    
+                  {% endif %}
+                </div>
+              </div>
+            </form>
+        </div>
+
+          
+        <div class="p-3 mb-2 bg-dark text-white" >
+          <h2 class="text-center">Delete Narudzbenica</h2>
+        </div>
+    
+            <div>
+              <form action="/deleteN/" method="POST">
+                {% csrf_token%}
+                <div class="form-group row">
+                  <label for="brojnarudzbenice" class="col-sm-2 col-form-label">Broj Narudzbenice</label>
+                  <div class="col-sm-1">
+                    <input type="text" class="form-control" name="brojnarudzbenice" id="brojnarudzbenice">
+                  </div>
+                </div>
+              <div class="form-group row">
+                <label for="brojkataloga" class="col-sm-2 col-form-label">Broj Kataloga</label>
+                <div class="col-sm-1">
+                  <input type="text" class="form-control" name="brojkataloga" id="brojkataloga" placeholder="">
+                </div>
+              </div>
+                <div class="form-group row">
+                  <label for="napomena" class="col-sm-2 col-form-label">Napomena</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="napomena" id="napomena" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary" data-toggle="alert">Delete</button>
+                      {% if messages %}
+                        {% for message in messages %}
+                        {%if "delete" in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                          {{ message }}
+                        {%endif%}
+                        </div>
+                        {% endfor %}                    
+                    {% endif %}
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+{% endblock %}

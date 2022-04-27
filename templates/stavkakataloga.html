@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <h1 class="display-1">Stavka Kataloga</h1>
+  </div>
+  <div class="container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Broj Kataloga</th>
+          <th scope="col">Sifra Artikla</th>
+          <th scope="col">Dimenzija</th>
+          <th scope="col">Cena</th>
+          <th scope="col">PDV</th>        
+          <th scope="col">Naziv</th>
+          <th scope="col">Naziv Artikla</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for na in data %}   
+        <tr>
+          <th scope="row">{{na.REDNIBROJ}}</th>
+          <td>{{na.BROJKATALOGA}}</td>
+          <td>{{na.SIFRAARTIKLA}}</td>
+          <td>{{na.DIMENZIJA}}</td>
+          <td>{{na.CENA}}</td>
+          <td>{{na.PDV}}</td>
+          <td>{{na.NAZIV}}</td>
+          <td>{{na.NAZIVARTIKLA}}</td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
+    </div>
+
+    <div class="p-3 mb-2 bg-dark text-white" >
+      <h2 class="text-center">Insert Stavka Kataloga</h2>
+    </div>
+
+    <div>
+      <form action="/insertStaK/" method="POST">
+        {% csrf_token%}
+        <div class="form-group row">
+          <label for="rednibroj" class="col-sm-2 col-form-label">Redni Broj</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="rednibroj" name="rednibroj" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="brojkataloga" class="col-sm-2 col-form-label">Broj Kataloga</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="brojkataloga" name="brojkataloga" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sifraartikla" class="col-sm-2 col-form-label">Sifra Artikla</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="sifraartikla" name="sifraartikla" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="dimenzija" class="col-sm-2 col-form-label">Dimenzija</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="dimenzija" name="dimenzija" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cena" class="col-sm-2 col-form-label">Cena</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="cena" name="cena" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pdv" class="col-sm-2 col-form-label">PDV</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="pdv" name="pdv" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="naziv" class="col-sm-2 col-form-label">Naziv</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="naziv" name="naziv" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nazivartikla" class="col-sm-2 col-form-label">Naziv Artikla</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="nazivartikla" name="nazivartikla" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" data-toggle="alert">Insert</button>
+                      {% if messages %}
+                        {% for message in messages %}
+                        {%if "insert" in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                          {{ message }}
+                        {%endif%}
+                        </div>
+                        {% endfor %}                    
+                    {% endif %}
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="p-3 mb-2 bg-dark text-white" >
+      <h2 class="text-center">Update Stavka Kataloga</h2>
+    </div>
+
+    <div>
+      <form action="/updateStaK/" method="POST">
+        {% csrf_token%}
+        <div class="form-group row">
+          <label for="rednibroj" class="col-sm-2 col-form-label">Redni Broj</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="rednibroj" name="rednibroj" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="brojkataloga" class="col-sm-2 col-form-label">Broj Kataloga</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="brojkataloga" name="brojkataloga" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sifraartikla" class="col-sm-2 col-form-label">Sifra Artikla</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="sifraartikla" name="sifraartikla" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="dimenzija" class="col-sm-2 col-form-label">Dimenzija</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="dimenzija" name="dimenzija" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cena" class="col-sm-2 col-form-label">Cena</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="cena" name="cena" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pdv" class="col-sm-2 col-form-label">PDV</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="pdv" name="pdv" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="naziv" class="col-sm-2 col-form-label">Naziv</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="naziv" name="naziv" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nazivartikla" class="col-sm-2 col-form-label">Naziv Artikla</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="nazivartikla" name="nazivartikla" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" data-toggle="alert">Update</button>
+                      {% if messages %}
+                        {% for message in messages %}
+                        {%if "udpate" in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                          {{ message }}
+                        {%endif%}
+                        </div>
+                        {% endfor %}                    
+                    {% endif %}
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="p-3 mb-2 bg-dark text-white" >
+      <h2 class="text-center">Delete Stavka Kataloga</h2>
+    </div>
+
+    <div>
+      <form action="/deleteStaK/" method="POST">
+        {% csrf_token%}
+        <div class="form-group row">
+          <label for="rednibroj" class="col-sm-2 col-form-label">Redni Broj</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="rednibroj" name="rednibroj" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="brojnarudzbenice" class="col-sm-2 col-form-label">Broj Otpremnice</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="brojnarudzbenice" name="brojnarudzbenice" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sifraartikla" class="col-sm-2 col-form-label">Sifra Artikla</label>
+          <div class="col-sm-1">
+            <input type="text" class="form-control" id="sifraartikla" name="sifraartikla" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary" data-toggle="alert">Delete</button>
+                      {% if messages %}
+                        {% for message in messages %}
+                        {%if "delete" in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                          {{ message }}
+                        {%endif%}
+                        </div>
+                        {% endfor %}                    
+                    {% endif %}
+          </div>
+        </div>
+      </form>
+    </div>
+{% endblock %}
